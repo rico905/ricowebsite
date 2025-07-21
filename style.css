@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;500&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  font-family: 'Kanit', sans-serif;
+  background: linear-gradient(to bottom, #111 0%, #000 100%);
+  color: #cfcfcf;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+canvas#hearts {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.container {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 800px;
+  padding: 20px;
+  margin: auto;
+  background: rgba(10, 10, 10, 0.4);
+  backdrop-filter: blur(6px);
+  border-radius: 10px;
+  box-shadow: 0 0 40px rgba(0,0,0,0.7);
+}
+
+h1 {
+  font-size: 2.8em;
+  font-weight: 500;
+  color: #e0e0e0;
+  margin-bottom: 25px;
+  letter-spacing: 1px;
+}
+
+p {
+  font-size: 1.4em;
+  font-weight: 300;
+  line-height: 1.6;
+  color: #aaaaaa;
+  transition: opacity 0.4s ease;
+  padding: 0 20px;
+}
+
+.fade {
+  opacity: 0;
+  animation: fadeIn 1s forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+img {
+  margin-top: 30px;
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  filter: grayscale(100%) brightness(0.6);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
+}
+
+button {
+  margin-top: 25px;
+  padding: 10px 30px;
+  font-size: 1em;
+  background: transparent;
+  border: 1px solid #555;
+  color: #999;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+button:hover {
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+  border-color: #777;
+}

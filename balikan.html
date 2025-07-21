@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Balikan Sama Mantan</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <canvas id="hearts"></canvas>
+
+  <div class="container">
+    <h1>Ungkapkan Isi Hatimu</h1>
+    <p class="sub">tuliskan aja nggak papa mungkin ini adalah salah satu cara agar kamu bisa menyampaikan pesan kepadannya.</p>
+
+    <textarea id="pesan" rows="7" placeholder="Tulis isi hatimu di sini..."></textarea>
+
+    <div class="btn-group">
+      <button onclick="tampilkanPesan()">Kirim (fiksi)</button>
+      <button onclick="window.location.href='bucin.html'">Kembali ke Halaman Lirik</button>
+    </div>
+
+    <div id="output" class="output-box"></div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById("hearts");
+    const ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    // Efek hujan sederhana tetap jalan
+    class Drop {
+      constructor() {
+        this.reset();
+      }
+
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * -canvas.height;
+        this.length = Math.random() * 15 + 10;
+        this.speed = Math.random() * 4 + 3;
+        this.alpha = Math.random() * 0.3 + 0.05;
+        this.width = Math.random() * 1.2 + 0.5;
+      }
+
+      update() {
+        this.y += this.speed;
+        if (this.y > canvas.height) this.reset();
+      }
+
+      draw() {
+        ctx.beginPath();
+        ctx.moveTo(this.x, this.y);
+        ctx.lineTo(this.x, this.y + this.length);
+        ctx.strokeStyle = `rgba(180, 180, 255, ${this.alpha})`;
+        ctx.lineWidth = this.width;
+        ctx.stroke();
+      }
+    }
+
+    const drops = Array.from({ length: 120 }, () => new Drop());
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drops.forEach(drop => {
+        drop.update();
+        drop.draw();
+      });
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    window.addEventListener("resize", () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+
+    // Fungsi pesan
+    function tampilkanPesan() {
+      const input = document.getElementById("pesan").value.trim();
+      const output = document.getElementById("output");
+
+      if (!input) {
+        output.innerHTML = "<p class='fade warning'>Isi dulu hatimu bro 😢</p>";
+      } else {
+        output.innerHTML = `<p class="fade pesan-tampil">"${input}"</p>`;
+      }
+    }
+  </script>
+</body>
+</html>
